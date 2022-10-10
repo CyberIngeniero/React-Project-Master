@@ -1,0 +1,10 @@
+html {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+body {
+    border: 10px solid #000;
+  height: 100%;
+}
