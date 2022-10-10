@@ -9,7 +9,7 @@
 ## Activities
 
 - [x] Activity 1: Create a Static React App
-`commit:`
+`commit: 484146201b8172e637a809ff5db850a59bc46b5d`
 - [ ] Activity 2: Create a Dynamic React App
 `commit:`
 
