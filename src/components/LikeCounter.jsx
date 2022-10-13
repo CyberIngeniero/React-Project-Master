@@ -16,7 +16,7 @@ function LikeCounter({ Likes }) {
         <LikeButton clickState={DoClick} />
       </div>
       <div className='p-2'>
-        <FcLike size={30} /> {clicked ? count + 1 : count}
+        <FcLike size={40} /> {clicked ? count + 1 : count}
       </div>
     </div>
   );
