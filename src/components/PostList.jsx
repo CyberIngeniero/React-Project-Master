@@ -1,54 +1,50 @@
-import Post from "./Post";
+import '../css/PostList.css';
+import { useEffect, useState } from 'react';
+import getPosts from '../services/data-service';
+import Post from './Post';
+import { ProgressBar } from 'loading-animations-react';
 
-const Posts = [
-  {
-    user: "@User1",
-    message: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur accusamus, hic a, incidunt minima suscipit, praesentium nam omnis aliquid ducimus repudiandae placeat! Dolores quos iusto quidem excepturi. Amet, cumque quae!",
-    created: Date.now() - 1000 * 60 * 60 * 24 * 3,
-    likes: 25,
-    comments: 15,
-    image: "https://robohash.org/user1",
-  },
-  {
-    user: "@User2",
-    message: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur accusamus, hic a, incidunt minima suscipit, praesentium nam omnis aliquid ducimus repudiandae placeat! Dolores quos iusto quidem excepturi. Amet, cumque quae!",
-    created: Date.now() - 1000 * 60 * 60 * 24 * 4,
-    likes: 10,
-    comments: 100,
-    image: "https://robohash.org/user2",
-  },
-  {
-    user: "@User3",
-    message: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur accusamus, hic a, incidunt minima suscipit, praesentium nam omnis aliquid ducimus repudiandae placeat! Dolores quos iusto quidem excepturi. Amet, cumque quae!",
-    created: Date.now() - 1000 * 60 * 60 * 24 * 5,
-    likes: 155,
-    comments: 30,
-    image: "https://robohash.org/user3",
-  },
-  {
-    user: "@User4",
-    message: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur accusamus, hic a, incidunt minima suscipit, praesentium nam omnis aliquid ducimus repudiandae placeat! Dolores quos iusto quidem excepturi. Amet, cumque quae!",
-    created: Date.now() - 1000 * 60 * 60 * 24 * 6,
-    likes: 30,
-    comments: 30,
-    image: "https://robohash.org/user4",
-  },
-];
+function randomIntFromInterval(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
-function PostList() {
+const initialState = [];
+
+function PostList({ post }) {
+  const [posts, setPosts] = useState(initialState);
+
+  useEffect(() => {
+    getPosts().then((posts) => {
+      setPosts(posts);
+    });
+  }, []);
+
   return (
-    <div className="d-flex flex-wrap p-5">
-      {Posts.map((post, index) => (
-        <Post
-          key={index}
-          user={post.user}
-          message={post.message}
-        //   created={post.created}
-          likes={post.likes}
-          comments={post.comments}
-          img={post.image}
-        />
-      ))}
+    <div className='d-flex flex-wrap p-3'>
+      {posts === initialState ? (
+        <div className='ProgressBar'>
+          <ProgressBar
+            className='ProgressBarComp'
+            borderColor='blue'
+            text='Loading...'
+            sliderColor='#fff'
+            sliderBackground='rgb(0, 0, 0)'
+          />
+        </div>
+      ) : (
+        posts
+          .filter((p) => (post === null ? true : (p.body.includes(post.toLowerCase()) || `@user${p.userId}`.includes(post.toLowerCase()))))
+          .map((post, index) => (
+            <Post
+              key={index}
+              user={`@user${post.userId}`}
+              message={post.body}
+              likes={randomIntFromInterval(50, 1000)}
+              comments={randomIntFromInterval(10, 300)}
+              img={`https://robohash.org/user${post.userId}`}
+            />
+          ))
+      )}
     </div>
   );
 }
