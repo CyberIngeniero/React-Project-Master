@@ -12,7 +12,9 @@
 `commit: 484146201b8172e637a809ff5db850a59bc46b5d`
 - [x] Activity 2: Create a Dynamic React App
 `commit: 1123fd003a2d8792e6e45fe17fa145a32e476d6f`
-- [ ] Activity 3: Create a React App HTTP
+- [x] Activity 3: Create a React App HTTP
+`commit: 897bf3a957f4dd01fc85a0b2043039bffcd80f9e`
+- [ ] Activity 4: Create a React App HTTP with React Routes & Hooks
 `commit: `
 
 ## Documentation
