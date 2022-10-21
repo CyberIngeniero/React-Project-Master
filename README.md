@@ -14,8 +14,8 @@
 `commit: 1123fd003a2d8792e6e45fe17fa145a32e476d6f`
 - [x] Activity 3: Create a React App HTTP
 `commit: 897bf3a957f4dd01fc85a0b2043039bffcd80f9e`
-- [ ] Activity 4: Create a React App HTTP with React Routes & Hooks
-`commit: `
+- [x] Activity 4: Create a React App HTTP with React Routes & Hooks
+`commit: 6e9ac79d52d837a2408f38976d3c5cf7c186a9e5`
 
 ## Documentation
 
