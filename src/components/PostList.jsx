@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { GetPostsApi } from '../services/data-service';
 import Post from './Post';
 import { ProgressBar } from 'loading-animations-react';
+import { useNavigate } from 'react-router';
 
 // function randomIntFromInterval(min, max) {
 //   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -12,12 +13,21 @@ const initialState = [];
 
 function PostList({ post, token }) {
   const [posts, setPosts] = useState(initialState);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    GetPostsApi(token).then((posts) => {
-      setPosts(posts);
-    });
-  }, [token]);
+    if (token === null) {
+      navigate('/login');
+    } else {
+      GetPostsApi()
+        .then((posts) => {
+          setPosts(posts);
+        })
+        .catch((err) => {
+          navigate('/login');
+        });
+    }
+  }, [navigate, token]);
 
   return (
     <div className='d-flex flex-wrap p-3'>

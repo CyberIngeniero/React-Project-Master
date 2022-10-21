@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { login } from '../services/data-service';
-
 
 function Login({ setToken }) {
   const [error, setError] = useState();
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -13,9 +14,10 @@ function Login({ setToken }) {
       .then((data) => {
         localStorage.setItem('token', data.token);
         setToken(data.token);
+        navigate('/');
       })
       .catch((err) => {
-        setError(err.response.data.message);
+        setError('Invalid email or password');
       });
   }
 

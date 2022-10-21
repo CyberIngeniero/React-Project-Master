@@ -1,9 +1,10 @@
 import './css/App.css';
 import { useState } from 'react';
+import { Route, Routes } from 'react-router';
 import Navbar from './components/Navbar';
-import SearchBar from './components/Searchbar';
-import PostList from './components/PostList';
 import Login from './components/Login';
+import Home from './screens/Home';
+import Profile from './components/Profile';
 
 function App() {
   const [inputText, setInputText] = useState('');
@@ -15,16 +16,13 @@ function App() {
 
   return (
     <div className='App'>
+      <Navbar Token={token} setToken={setToken}/>
       <div className='container'>
-        {token ? (
-          <>
-            <Navbar />
-            <SearchBar SearchText={SearchText} />
-            <PostList post={inputText}/>
-          </>
-        ) : (
-          <Login setToken={setToken} />
-        )}
+        <Routes>
+          <Route path='/' element={<Home SearchText={SearchText} inputText={inputText} token={token}/>} />
+          <Route path='/login' element={<Login setToken={setToken} />} />
+          <Route path='/profile' element={<Profile token={token}/>} />
+        </Routes>
       </div>
     </div>
   );
